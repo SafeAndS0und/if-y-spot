@@ -1,0 +1,15 @@
+@import '../../assets/css/variables.scss';
+
+header {
+  background-color: $bannerCreamy;
+  display: grid;
+  align-items: center;
+  padding: 0 50px;
+  position: relative;
+
+  h1 {
+    justify-self: right;
+    font-size: 2.3em;
+    color: white;
+  }
+}

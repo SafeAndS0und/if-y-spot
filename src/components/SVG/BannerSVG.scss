@@ -1,0 +1,22 @@
+.some-form {
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: left top;
+  fill: #ffeef3;
+  opacity: 0.15;
+  animation: wave 15s alternate infinite;
+
+  @keyframes wave {
+    from {
+      opacity: .1;
+      transform: scaleX(1.9) scaleY(1);
+    }
+    to{
+      opacity: .19;
+      transform: scaleX(2.6) scaleY(1.1);
+    }
+
+  }
+}
