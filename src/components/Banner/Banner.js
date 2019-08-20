@@ -9,7 +9,7 @@ export default () => {
          <BannerSVG/>
          <h1>
             Help us get you through the day <br/>
-            With music
+            With music.
          </h1>
       </header>
    )
