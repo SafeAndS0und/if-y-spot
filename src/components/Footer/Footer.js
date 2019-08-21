@@ -1,6 +1,6 @@
 import React from 'react'
 import './Footer.scss'
-import {FaAngleLeft, FaAngleRight, FaPlayCircle} from "react-icons/fa"
+import {FaStepBackward, FaStepForward, FaPlayCircle, FaHeart, FaRetweet, FaVolumeUp, FaSync} from "react-icons/fa"
 
 export default () =>{
 
@@ -18,9 +18,28 @@ export default () =>{
          </section>
 
          <section className="controls">
-            <FaAngleLeft className="control"/>
+            <FaStepBackward className="control"/>
             <FaPlayCircle className="control play"/>
-            <FaAngleRight className="control"/>
+            <FaStepForward className="control"/>
+         </section>
+
+         <section className="timer">
+            <div className="line">
+
+            </div>
+
+            <div className="circle">
+
+            </div>
+
+            <span className="time">2:43</span>
+         </section>
+
+         <section className="settings">
+            <FaHeart className="setting" />
+            <FaRetweet className="setting" />
+            <FaVolumeUp className="setting" />
+            <FaSync className="setting" />
          </section>
 
       </footer>
