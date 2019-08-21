@@ -1,5 +1,8 @@
+@import '../../assets/css/variables';
+
 .songs {
   padding: 25px;
+  width: 85%;
 
   .top {
 
@@ -15,6 +18,90 @@
       color: #8e8e8e;
       font-size: .88em;
       font-weight: 400;
+    }
+  }
+
+  .list {
+
+    .headline, article {
+      display: grid;
+      grid-template-columns: 2fr 1fr 0.75fr;
+    }
+
+    .headline {
+      color: #424242;
+    }
+
+    article {
+      margin-bottom: 5px;
+      padding: 7px;
+      border-bottom: 2px solid #f5f5f5;
+      transition: .3s;
+      cursor: pointer;
+      opacity: .9;
+      position: relative;
+
+      &:hover {
+        transform: scale(1.01);
+        box-shadow: 0 2px 3px 1px rgba(238, 238, 238, 0.66);
+        opacity: 1;
+      }
+
+      .track {
+        display: grid;
+        align-items: center;
+        grid-template-areas:
+                "i t t t t t t t ."
+                "i a a a a a a a .";
+        img {
+          grid-area: i;
+          border-radius: 5px;
+        }
+        .title {
+          grid-area: t;
+          margin: 0;
+          font-size: 1em;
+          padding-bottom: 2px;
+          color: #4b4b4b;
+        }
+        .artist {
+          grid-area: a;
+          margin: 0;
+          font-size: .85em;
+          color: #9a9a9a;
+        }
+      }
+
+      .album, .duration {
+        font-size: .88em;
+        color: grey;
+      }
+      .duration {
+        padding-left: 3px;
+      }
+
+      .heart, .dots {
+        top: 50%;
+        transform: translateY(-50%);
+        color: #bfbfbf;
+        opacity: .9;
+        transition: .3s;
+
+        &:hover{
+          opacity: 1;
+          color: $sidebarPurple;
+        }
+      }
+
+      .heart{
+        position: absolute;
+        right: -50px;
+      }
+
+      .dots {
+        position: absolute;
+        right: -90px;
+      }
     }
   }
 }

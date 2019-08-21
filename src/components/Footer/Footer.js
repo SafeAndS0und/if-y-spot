@@ -10,10 +10,8 @@ export default () =>{
          <section className="now-playing">
             <img src="https://images-na.ssl-images-amazon.com/images/I/71tptrd%2BWIL._SY355_.png" alt=""/>
             <div className="author">
-               <h3>Eminem</h3>
-               <p>
-                  Lose Yourself
-               </p>
+               <h3>Lose Yourself</h3>
+               <p>Eminem</p>
             </div>
          </section>
 
