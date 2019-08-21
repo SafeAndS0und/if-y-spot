@@ -14,12 +14,12 @@ export default () => {
          <div className="menu">
 
             <ul>
-               <li className="active">
+               <li>
                   <FaSearch className="icon" />
                   <p>Search</p>
                </li>
 
-               <li>
+               <li className="active">
                   <FaRegHeart className="icon" />
                   <p>Favorites</p>
                </li>
