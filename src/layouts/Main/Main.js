@@ -14,7 +14,7 @@ export default ({children}) =>{
          </div>
 
 
-         <main>
+         <main >
             <Banner/>
 
             <section>

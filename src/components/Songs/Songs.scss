@@ -1,9 +1,10 @@
 @import '../../assets/css/variables';
 
 .songs {
-  padding: 25px;
+  padding: 25px 35px;
   width: 75%;
   margin-bottom: 100px;
+  position: relative;
 
   .top {
 
@@ -19,6 +20,27 @@
       color: #8e8e8e;
       font-size: .88em;
       font-weight: 400;
+    }
+
+    .right {
+      position: absolute;
+      top: 35px;
+      right: 25px;
+      display: grid;
+      grid-template-columns: max-content repeat(2, 40px);
+      justify-items: center;
+      color: #a5a5a5;
+
+      p{font-size: .86em}
+
+      p, svg {
+        cursor: pointer;
+        transition: .3s;
+
+        &:hover {
+          color: $sidebarPurple;
+        }
+      }
     }
   }
 

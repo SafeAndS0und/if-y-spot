@@ -8,7 +8,7 @@ export default () => {
       <header>
          <BannerSVG/>
          <h1>
-            Help us get you through the day <br/>
+            Let us get you through the day <br/>
             With music.
          </h1>
       </header>
