@@ -4,7 +4,7 @@
 }
 .fade-enter-active {
     opacity: 1 !important;
-    transition: opacity 500ms;
+    transition: opacity 700ms;
     transform: translateX(0);
 }
 .fade-exit {
@@ -12,5 +12,5 @@
 }
 .fade-exit-active {
     opacity: 0 !important;
-    transition: opacity 500ms;
+    transition: opacity 700ms;
 }
