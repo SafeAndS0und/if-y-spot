@@ -1,14 +1,20 @@
-import React from 'react'
+import React, {useState} from 'react'
 import MainLayout from './layouts/Main/Main'
 import Songs from './components/Songs/Songs'
 import songsData from './assets/songsData'
 
 function App(){
+
+   const [currentSongId, setCurrentSongId] = useState(0)
+
+   const findCurrentSongId = falsyList => {
+      return falsyList.findIndex(value => value)
+   }
    return (
       <div className="App">
 
-         <MainLayout>
-            <Songs songsData={songsData} />
+         <MainLayout currentSongId={currentSongId}>
+            <Songs songsData={songsData} songChanged={falsyList => setCurrentSongId(findCurrentSongId(falsyList))} />
          </MainLayout>
 
       </div>

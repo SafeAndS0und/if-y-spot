@@ -6,7 +6,7 @@ import Banner from '../../components/Banner/Banner'
 import FromBottom from '../../assets/transitions/FromBottom'
 
 
-export default ({children}) =>{
+export default ({children, currentSongId}) =>{
 
    const [showList, toggleShowList] = useState(false)
 
@@ -34,7 +34,7 @@ export default ({children}) =>{
 
          <div className="footer-container">
             <FromBottom toggle={showList}>
-               <Footer/>
+               <Footer currentSongId={currentSongId}/>
             </FromBottom>
          </div>
       </div>

@@ -1,17 +1,18 @@
 import React from 'react'
 import './Footer.scss'
 import {FaStepBackward, FaStepForward, FaPlayCircle, FaHeart, FaRetweet, FaVolumeUp, FaSync} from "react-icons/fa"
+import songsData from '../../assets/songsData'
 
-export default () =>{
+export default ({currentSongId: id}) =>{
 
    return (
       <footer>
 
          <section className="now-playing">
-            <img src="https://images-na.ssl-images-amazon.com/images/I/71tptrd%2BWIL._SY355_.png" alt=""/>
+            <img src={songsData[id].imgURL} alt="artist"/>
             <div className="author">
-               <h3>Lose Yourself</h3>
-               <p>Eminem</p>
+               <h3>{songsData[id].title}</h3>
+               <p>{songsData[id].artist}</p>
             </div>
          </section>
 

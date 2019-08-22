@@ -3,7 +3,7 @@ import './Songs.scss'
 import {FaHeart, FaEllipsisH, FaRandom} from "react-icons/fa"
 import Fade from '../../assets/transitions/Fade'
 
-export default ({songsData}) =>{
+export default ({songsData, songChanged}) =>{
 
    const [showList, toggleShowList] = useState(false)
    const [isActive, setIsActive] = useState([])
@@ -20,16 +20,13 @@ export default ({songsData}) =>{
 
    const updateIsActive = (index) => {
       setIsActive(isActive => {
-         const list = isActive.map((value, i ) => {
-            if(i === index) return true
-            else return false
-         })
+         const list = isActive.map((value, i ) => i === index)
 
-         console.log(list)
-
+         songChanged(list)
          return list
-
       })
+
+
    }
 
    return (
