@@ -1,15 +1,26 @@
 import React, {useState, useEffect} from 'react'
 import './Footer.scss'
-import {FaStepBackward, FaStepForward, FaPlayCircle, FaHeart, FaRetweet, FaVolumeUp, FaSync} from "react-icons/fa"
+import {
+   FaStepBackward,
+   FaStepForward,
+   FaPlayCircle,
+   FaHeart,
+   FaRetweet,
+   FaVolumeUp,
+   FaSync,
+   FaPauseCircle
+} from "react-icons/fa"
 import songsData from '../../assets/songsData'
+import Music from '../../helpers/Music'
 
 export default ({currentSongId: id}) =>{
 
    const [timerWidth, setTimerWidth] = useState(0)
+   const [playing, togglePlaying] = useState(false)
 
    let timerRef = null
 
-   const setTimerRef = element => {
+   const setTimerRef = element =>{
       if(element)
          timerRef = element
    }
@@ -32,7 +43,7 @@ export default ({currentSongId: id}) =>{
 
       window.addEventListener('resize', updateTimerWidth)
 
-      return () => {
+      return () =>{
          window.removeEventListener('resize', updateTimerWidth)
       }
 
@@ -50,7 +61,14 @@ export default ({currentSongId: id}) =>{
 
          <section className="controls">
             <FaStepBackward className="control"/>
-            <FaPlayCircle className="control play"/>
+
+            <Music playing={playing} setPlaying={togglePlaying} url={songsData[id].url}>
+               {playing
+                  ? <FaPauseCircle className="control play" onClick={() => togglePlaying(!playing)}/>
+                  : <FaPlayCircle className="control play" onClick={() => togglePlaying(!playing)}/>
+               }
+            </Music>
+
             <FaStepForward className="control"/>
          </section>
 
@@ -65,9 +83,9 @@ export default ({currentSongId: id}) =>{
          </section>
 
          <section className="settings">
+            <FaVolumeUp className="setting"/>
             <FaHeart className="setting"/>
             <FaRetweet className="setting"/>
-            <FaVolumeUp className="setting"/>
             <FaSync className="setting"/>
          </section>
 
