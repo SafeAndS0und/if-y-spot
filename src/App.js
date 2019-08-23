@@ -5,7 +5,7 @@ import songsData from './assets/songsData'
 
 function App(){
 
-   const [currentSongId, setCurrentSongId] = useState(0)
+   const [currentSongId, setCurrentSongId] = useState(-1)
 
    const findCurrentSongId = falsyList => {
       return falsyList.findIndex(value => value)

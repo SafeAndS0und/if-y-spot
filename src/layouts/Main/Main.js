@@ -33,7 +33,7 @@ export default ({children, currentSongId}) =>{
          </main>
 
          <div className="footer-container">
-            <FromBottom toggle={showList}>
+            <FromBottom toggle={currentSongId >= 0}>
                <Footer currentSongId={currentSongId}/>
             </FromBottom>
          </div>

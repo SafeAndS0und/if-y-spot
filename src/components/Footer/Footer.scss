@@ -72,20 +72,33 @@ footer {
     grid-template-columns: 6fr 1fr;
     position: relative;
 
-    .line {
-      width: 100%;
-      height: 3px;
-      background-color: $brighterPurple;
-      opacity: .9;
-    }
-
     .circle {
-      position: absolute;
+      position: relative;
       width: 15px;
       height: 15px;
       border-radius: 50%;
       border: 2px solid white;
       background-color: $sidebarPurple;
+
+      .line-before, .line-after {
+        position: absolute;
+        height: 3px;
+        opacity: .9;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .line-before {
+        right: 13px;
+        width: 120px;
+        background-color: $brighterPurple;
+      }
+      .line-after {
+        left: 13px;
+        width: 235px;
+        background-color: #d0d0e8;
+      }
+
     }
 
     .time {

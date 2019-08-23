@@ -1,13 +1,45 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import './Footer.scss'
 import {FaStepBackward, FaStepForward, FaPlayCircle, FaHeart, FaRetweet, FaVolumeUp, FaSync} from "react-icons/fa"
 import songsData from '../../assets/songsData'
 
 export default ({currentSongId: id}) =>{
 
+   const [timerWidth, setTimerWidth] = useState(0)
+
+   let timerRef = null
+
+   const setTimerRef = element => {
+      if(element)
+         timerRef = element
+   }
+
+   useEffect(() =>{
+      const before = timerRef.children[0].children[0]
+      const after = timerRef.children[0].children[1]
+
+      const updateTimerWidth = () =>{
+         setTimerWidth(() =>{
+            // if(!timerRef) return 0
+            const newTimerWidth = timerRef.clientWidth * (6 / 7) // g-t-c: 6fr 1fr
+            before.style.width = `${newTimerWidth / 2}px`
+            after.style.width = `${newTimerWidth / 2}px`
+            return newTimerWidth
+         })
+      }
+
+      updateTimerWidth()
+
+      window.addEventListener('resize', updateTimerWidth)
+
+      return () => {
+         window.removeEventListener('resize', updateTimerWidth)
+      }
+
+   }, [])
+
    return (
       <footer>
-
          <section className="now-playing">
             <img src={songsData[id].imgURL} alt="artist"/>
             <div className="author">
@@ -22,23 +54,21 @@ export default ({currentSongId: id}) =>{
             <FaStepForward className="control"/>
          </section>
 
-         <section className="timer">
-            <div className="line">
-
-            </div>
+         <section className="timer" ref={setTimerRef}>
 
             <div className="circle">
-
+               <span className="line-before"></span>
+               <span className="line-after"></span>
             </div>
 
-            <span className="time">2:43</span>
+            <span className="time">{songsData[id].duration}</span>
          </section>
 
          <section className="settings">
-            <FaHeart className="setting" />
-            <FaRetweet className="setting" />
-            <FaVolumeUp className="setting" />
-            <FaSync className="setting" />
+            <FaHeart className="setting"/>
+            <FaRetweet className="setting"/>
+            <FaVolumeUp className="setting"/>
+            <FaSync className="setting"/>
          </section>
 
       </footer>

@@ -33,7 +33,7 @@ export default ({songsData, songChanged}) =>{
       <div className="songs">
          <div className="top">
             <h2>Favorites</h2>
-            <p>43 songs, updated yesterday</p>
+            <p>{isActive.length} songs, updated yesterday</p>
 
             <div className="right">
                <p>Shuffle All</p>
