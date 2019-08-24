@@ -13,14 +13,17 @@ import {
 import songsData from '../../assets/songsData'
 import Music from '../../helpers/Music'
 
+let intervalId
+
 export default ({currentSongId: id}) =>{
 
    const [lineWidth, setLineWidth] = useState(0)
    const [playing, togglePlaying] = useState(false)
    const [lineGTC, setLineGTC] = useState('0 15px auto')
-   const [circlePosition, setCirclePosition] = useState(0)
+   const [currentTime, updateCurrentTime] = useState(0)
 
    let lineRef = null
+
 
    const setLineRef = element =>{
       if(element)
@@ -42,12 +45,31 @@ export default ({currentSongId: id}) =>{
 
    }, [])
 
+   const enableCountdown = () =>{
+      intervalId = setInterval(() =>{
+         updateCurrentTime(currentTime =>{
+            const newTime = currentTime + 1
+            updateCircleVisualPos(Math.floor((newTime / 238) * 100))
+            return newTime
+         })
+      }, 1000)
+   }
+
+   const handlePlayClick = () =>{
+      togglePlaying(!playing)
+
+      enableCountdown()
+   }
+
+   const handlePauseClick = () =>{
+      togglePlaying(!playing)
+      console.log(intervalId)
+      clearInterval(intervalId)
+   }
+
    const handleLineClick = e =>{
       const proportion = Math.floor((e.nativeEvent.offsetX / lineWidth) * 100)
-      console.log("offset", e.nativeEvent.offsetX, "lineWidth", lineWidth)
-      console.log(proportion, (e.nativeEvent.offsetX / lineWidth))
       updateCircleVisualPos(proportion)
-      setCirclePosition(proportion)
    }
 
    const updateCircleVisualPos = (lineBeforeWidth) =>{
@@ -68,8 +90,8 @@ export default ({currentSongId: id}) =>{
 
             <Music playing={playing} setPlaying={togglePlaying} url={songsData[id].url}>
                {playing
-                  ? <FaPauseCircle className="control play" onClick={() => togglePlaying(!playing)}/>
-                  : <FaPlayCircle className="control play" onClick={() => togglePlaying(!playing)}/>
+                  ? <FaPauseCircle className="control play" onClick={handlePauseClick}/>
+                  : <FaPlayCircle className="control play" onClick={handlePlayClick}/>
                }
             </Music>
 
@@ -85,6 +107,8 @@ export default ({currentSongId: id}) =>{
                     gridTemplateColumns: lineGTC
                  }}>
 
+               <div className="invisible">
+               </div>
                <div className="line-before">
                </div>
                <div className="circle">
