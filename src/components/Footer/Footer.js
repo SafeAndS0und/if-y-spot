@@ -15,40 +15,44 @@ import Music from '../../helpers/Music'
 
 export default ({currentSongId: id}) =>{
 
-   const [timerWidth, setTimerWidth] = useState(0)
+   const [lineWidth, setLineWidth] = useState(0)
    const [playing, togglePlaying] = useState(false)
+   const [lineGTC, setLineGTC] = useState('0 15px auto')
+   const [circlePosition, setCirclePosition] = useState(0)
 
-   let timerRef = null
+   let lineRef = null
 
-   const setTimerRef = element =>{
+   const setLineRef = element =>{
       if(element)
-         timerRef = element
+         lineRef = element
    }
 
    useEffect(() =>{
-      const before = timerRef.children[0].children[0]
-      const after = timerRef.children[0].children[1]
-
-      const updateTimerWidth = () =>{
-         setTimerWidth(() =>{
-            // if(!timerRef) return 0
-            const newTimerWidth = timerRef.clientWidth * (6 / 7) // g-t-c: 6fr 1fr
-            before.style.width = `${newTimerWidth / 2}px`
-            after.style.width = `${newTimerWidth / 2}px`
-            return newTimerWidth
+      const updateLineWidth = () =>{
+         setLineWidth(() =>{
+            return lineRef.clientWidth // g-t-c: 6fr 1fr
          })
       }
-
-      updateTimerWidth()
-
-      window.addEventListener('resize', updateTimerWidth)
+      updateLineWidth()
+      window.addEventListener('resize', updateLineWidth)
 
       return () =>{
-         window.removeEventListener('resize', updateTimerWidth)
+         window.removeEventListener('resize', updateLineWidth)
       }
 
    }, [])
 
+   const handleLineClick = e =>{
+      const proportion = Math.floor((e.nativeEvent.offsetX / lineWidth) * 100)
+      console.log("offset", e.nativeEvent.offsetX, "lineWidth", lineWidth)
+      console.log(proportion, (e.nativeEvent.offsetX / lineWidth))
+      updateCircleVisualPos(proportion)
+      setCirclePosition(proportion)
+   }
+
+   const updateCircleVisualPos = (lineBeforeWidth) =>{
+      setLineGTC(`${lineBeforeWidth}% 15px auto`)
+   }
    return (
       <footer>
          <section className="now-playing">
@@ -72,11 +76,22 @@ export default ({currentSongId: id}) =>{
             <FaStepForward className="control"/>
          </section>
 
-         <section className="timer" ref={setTimerRef}>
+         <section className="timer">
 
-            <div className="circle">
-               <span className="line-before"></span>
-               <span className="line-after"></span>
+            <div className="line-container"
+                 ref={setLineRef}
+                 onClick={handleLineClick}
+                 style={{
+                    gridTemplateColumns: lineGTC
+                 }}>
+
+               <div className="line-before">
+               </div>
+               <div className="circle">
+               </div>
+               <div className="line-after">
+               </div>
+
             </div>
 
             <span className="time">{songsData[id].duration}</span>
