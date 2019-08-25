@@ -62,6 +62,11 @@ export default ({currentSong}) =>{
       clearInterval(intervalId)
       setSongDuration(duration)
       togglePlaying(false)
+
+      setTimeout(() => {
+         togglePlaying(true)
+         enableCountdown()
+      }, 800)
    }
 
    const handlePlayClick = () =>{
