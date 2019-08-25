@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 
-export default ({children, playing, url, setPlaying, onSongChange}) =>{
+export default ({children, playing, url, setPlaying, onSongChange, proportion, ended}) =>{
 
    const [audio, setNewAudio] = useState(new Audio(url))
 
@@ -27,12 +27,19 @@ export default ({children, playing, url, setPlaying, onSongChange}) =>{
          audio.addEventListener('loadedmetadata', () => {
             onSongChange(audio.duration)
          })
+         audio.addEventListener('ended', () => ended(audio.duration))
 
          audio.volume = 0.1
 
          return audio
       })
    }, [url])
+
+   useEffect(() => {
+      const newTime = audio.duration * (proportion * 0.01)
+      if(isNaN(newTime)) return
+      audio.currentTime = newTime
+   }, [proportion])
 
    return (
       <>

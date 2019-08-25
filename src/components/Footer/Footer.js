@@ -12,6 +12,7 @@ import {
 } from "react-icons/fa"
 import songsData from '../../assets/songsData'
 import Music from '../../helpers/Music'
+import timePrettifier from '../../helpers/timePrettifier'
 
 let intervalId
 
@@ -19,6 +20,7 @@ export default ({currentSongId: id}) =>{
 
    const [lineWidth, setLineWidth] = useState(0)
    const [playing, togglePlaying] = useState(false)
+   const [playedProportion, setPlayedProportion] = useState(0)
    const [lineGTC, setLineGTC] = useState('0 15px auto')
    const [currentTime, updateCurrentTime] = useState(0)
    const [songDuration, setSongDuration] = useState(null)
@@ -56,8 +58,12 @@ export default ({currentSongId: id}) =>{
       }, 1000)
    }
 
-   const handleSongChange = duration => {
+   const handleSongChange = duration =>{
+      updateCurrentTime(0)
+      updateCircleVisualPos(0)
+      clearInterval(intervalId)
       setSongDuration(duration)
+      togglePlaying(false)
    }
 
    const handlePlayClick = () =>{
@@ -72,12 +78,17 @@ export default ({currentSongId: id}) =>{
 
    const handleLineClick = e =>{
       const proportion = Math.floor((e.nativeEvent.offsetX / lineWidth) * 100)
+      const uglyTime = songDuration * (proportion * 0.01)
+      const prettyTime = Math.round(uglyTime)
+      updateCurrentTime(prettyTime)
+      setPlayedProportion(proportion)
       updateCircleVisualPos(proportion)
    }
 
    const updateCircleVisualPos = (lineBeforeWidth) =>{
       setLineGTC(`${lineBeforeWidth}% 15px auto`)
    }
+
    return (
       <footer>
          <section className="now-playing">
@@ -91,10 +102,16 @@ export default ({currentSongId: id}) =>{
          <section className="controls">
             <FaStepBackward className="control"/>
 
-            <Music playing={playing} setPlaying={togglePlaying} url={songsData[id].url} onSongChange={handleSongChange}>
-               {playing
-                  ? <FaPauseCircle className="control play" onClick={handlePauseClick}/>
-                  : <FaPlayCircle className="control play" onClick={handlePlayClick}/>
+            <Music playing={playing}
+                   setPlaying={togglePlaying}
+                   url={songsData[id].url}
+                   onSongChange={handleSongChange}
+                   ended={handleSongChange}
+                   proportion={playedProportion}>
+               {
+                  playing
+                     ? <FaPauseCircle className="control play" onClick={handlePauseClick}/>
+                     : <FaPlayCircle className="control play" onClick={handlePlayClick}/>
                }
             </Music>
 
@@ -121,7 +138,8 @@ export default ({currentSongId: id}) =>{
 
             </div>
 
-            <span className="time">{currentTime} / {songDuration}</span>
+            <span
+               className="time">{currentTime === 0 ? null : timePrettifier(currentTime) + ' / '} {timePrettifier(songDuration)}</span>
          </section>
 
          <section className="settings">
