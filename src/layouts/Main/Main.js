@@ -6,14 +6,20 @@ import Banner from '../../components/Banner/Banner'
 import FromBottom from '../../assets/transitions/FromBottom'
 
 
-export default ({children, currentSongId}) =>{
+export default ({children, currentSong}) =>{
 
    const [showList, toggleShowList] = useState(false)
+   const [songChosen, setSongChosen] = useState(false)
+
 
    useEffect(() =>{
       setTimeout(() => toggleShowList(true), 600)
    }, [])
 
+   useEffect(() =>{
+      if(currentSong && Object.entries(currentSong).length !== 0)
+         setSongChosen(true)
+   }, [currentSong])
 
    return (
       <div className="main-layout">
@@ -22,9 +28,7 @@ export default ({children, currentSongId}) =>{
             <Sidebar/>
          </div>
 
-
          <main>
-
             <Banner toggle={showList}/>
 
             <section>
@@ -33,8 +37,9 @@ export default ({children, currentSongId}) =>{
          </main>
 
          <div className="footer-container">
-            <FromBottom toggle={currentSongId >= 0}>
-               <Footer currentSongId={currentSongId}/>
+            {songChosen}
+            <FromBottom toggle={songChosen}>
+               <Footer currentSong={currentSong}/>
             </FromBottom>
          </div>
       </div>

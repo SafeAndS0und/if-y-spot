@@ -10,13 +10,12 @@ import {
    FaSync,
    FaPauseCircle
 } from "react-icons/fa"
-import songsData from '../../assets/songsData'
 import Music from '../../helpers/Music'
 import timePrettifier from '../../helpers/timePrettifier'
 
 let intervalId
 
-export default ({currentSongId: id}) =>{
+export default ({currentSong}) =>{
 
    const [lineWidth, setLineWidth] = useState(0)
    const [playing, togglePlaying] = useState(false)
@@ -26,7 +25,6 @@ export default ({currentSongId: id}) =>{
    const [songDuration, setSongDuration] = useState(null)
 
    let lineRef = null
-
 
    const setLineRef = element =>{
       if(element)
@@ -90,65 +88,66 @@ export default ({currentSongId: id}) =>{
    }
 
    return (
-      <footer>
-         <section className="now-playing">
-            <img src={songsData[id].imgURL} alt="artist"/>
-            <div className="author">
-               <h3>{songsData[id].title}</h3>
-               <p>{songsData[id].artist}</p>
-            </div>
-         </section>
-
-         <section className="controls">
-            <FaStepBackward className="control"/>
-
-            <Music playing={playing}
-                   setPlaying={togglePlaying}
-                   url={songsData[id].url}
-                   onSongChange={handleSongChange}
-                   ended={handleSongChange}
-                   proportion={playedProportion}>
-               {
-                  playing
-                     ? <FaPauseCircle className="control play" onClick={handlePauseClick}/>
-                     : <FaPlayCircle className="control play" onClick={handlePlayClick}/>
-               }
-            </Music>
-
-            <FaStepForward className="control"/>
-         </section>
-
-         <section className="timer">
-
-            <div className="line-container"
-                 ref={setLineRef}
-                 onClick={handleLineClick}
-                 style={{
-                    gridTemplateColumns: lineGTC
-                 }}>
-
-               <div className="invisible">
+         <footer>
+            <section className="now-playing">
+               <img src={currentSong.imgURL} alt="artist"/>
+               <div className="author">
+                  <h3>{currentSong.title}</h3>
+                  <p>{currentSong.artist}</p>
                </div>
-               <div className="line-before">
+            </section>
+
+            <section className="controls">
+               <FaStepBackward className="control"/>
+
+               <Music playing={playing}
+                      setPlaying={togglePlaying}
+                      url={currentSong.url}
+                      onSongChange={handleSongChange}
+                      ended={handleSongChange}
+                      proportion={playedProportion}>
+                  {
+                     playing
+                        ? <FaPauseCircle className="control play" onClick={handlePauseClick}/>
+                        : <FaPlayCircle className="control play" onClick={handlePlayClick}/>
+                  }
+               </Music>
+
+               <FaStepForward className="control"/>
+            </section>
+
+            <section className="timer">
+
+               <div className="line-container"
+                    ref={setLineRef}
+                    onClick={handleLineClick}
+                    style={{
+                       gridTemplateColumns: lineGTC
+                    }}>
+
+                  <div className="invisible">
+                  </div>
+                  <div className="line-before">
+                  </div>
+                  <div className="circle">
+                  </div>
+                  <div className="line-after">
+                  </div>
+
                </div>
-               <div className="circle">
-               </div>
-               <div className="line-after">
-               </div>
 
-            </div>
+               <span
+                  className="time">{currentTime === 0 ? null : timePrettifier(currentTime) + ' / '} {timePrettifier(songDuration)}</span>
+            </section>
 
-            <span
-               className="time">{currentTime === 0 ? null : timePrettifier(currentTime) + ' / '} {timePrettifier(songDuration)}</span>
-         </section>
+            <section className="settings">
+               <FaVolumeUp className="setting"/>
+               <FaHeart className="setting"/>
+               <FaRetweet className="setting"/>
+               <FaSync className="setting"/>
+            </section>
 
-         <section className="settings">
-            <FaVolumeUp className="setting"/>
-            <FaHeart className="setting"/>
-            <FaRetweet className="setting"/>
-            <FaSync className="setting"/>
-         </section>
+         </footer>
 
-      </footer>
    )
 }

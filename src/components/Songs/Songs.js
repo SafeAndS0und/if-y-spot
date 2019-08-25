@@ -3,7 +3,7 @@ import './Songs.scss'
 import {FaHeart, FaEllipsisH, FaRandom} from "react-icons/fa"
 import Fade from '../../assets/transitions/Fade'
 
-export default ({songsData, songChanged}) =>{
+export default ({songsData, songChanged, shuffle, setCurrentSong}) =>{
 
    const [showList, toggleShowList] = useState(false)
    const [isActive, setIsActive] = useState([])
@@ -18,26 +18,28 @@ export default ({songsData, songChanged}) =>{
    }, [])
 
 
-   const updateIsActive = (index) => {
+   const updateIsActive = (id) => {
       setIsActive(isActive => {
-         const list = isActive.map((value, i ) => i === index)
+         const list = isActive.map((value, i ) => i === id)
 
-         songChanged(list)
+         // songChanged(list)
          return list
       })
-
-
    }
+
+   useEffect(() => {
+      setCurrentSong(songsData.find(({id}) => isActive[id]))
+   }, [isActive])
 
    return (
       <div className="songs">
          <div className="top">
             <h2>Favorites</h2>
-            <p>{isActive.length} songs, updated yesterday</p>
+            <p>{songsData.length} songs, updated yesterday</p>
 
             <div className="right">
-               <p>Shuffle All</p>
-               <FaRandom/>
+               <p onClick={shuffle}>Shuffle All</p>
+               <FaRandom onClick={shuffle}/>
                <FaEllipsisH/>
 
             </div>
@@ -55,8 +57,8 @@ export default ({songsData, songChanged}) =>{
                   songsData.map((song, index) =>{
 
                      return (
-                        <article key={song.title} onClick={() => updateIsActive(index)}
-                                 className={isActive[index] ? "active" : null}>
+                        <article key={song.title} onClick={() => updateIsActive(song.id)}
+                                 className={isActive[song.id] ? "active" : null}>
                            <div className="track">
                               <img src={song.imgURL} alt="artist"/>
                               <h3 className="title">{song.title}</h3>

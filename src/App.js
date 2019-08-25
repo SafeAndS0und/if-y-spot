@@ -2,19 +2,24 @@ import React, {useState} from 'react'
 import MainLayout from './layouts/Main/Main'
 import Songs from './components/Songs/Songs'
 import songsData from './assets/songsData'
+import _shuffle from 'lodash/shuffle'
 
 function App(){
 
-   const [currentSongId, setCurrentSongId] = useState(-1)
+   const [songs, setSongs] = useState(songsData)
+   const [currentSong, setCurrentSong] = useState(null)
 
-   const findCurrentSongId = falsyList => {
-      return falsyList.findIndex(value => value)
+   const shuffle = () =>{
+      setSongs(songs => _shuffle(songs))
    }
-   return (
-      <div className="App">
 
-         <MainLayout currentSongId={currentSongId}>
-            <Songs songsData={songsData} songChanged={falsyList => setCurrentSongId(findCurrentSongId(falsyList))} />
+   return (
+      <div>
+         <MainLayout currentSong={currentSong}>
+            <Songs songsData={songs}
+                   setCurrentSong={setCurrentSong}
+                   shuffle={shuffle}
+                   />
          </MainLayout>
 
       </div>
