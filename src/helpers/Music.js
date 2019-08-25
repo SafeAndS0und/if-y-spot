@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 
-export default ({children, playing, url, setPlaying}) =>{
+export default ({children, playing, url, setPlaying, onSongChange}) =>{
 
    const [audio, setNewAudio] = useState(new Audio(url))
 
@@ -20,7 +20,18 @@ export default ({children, playing, url, setPlaying}) =>{
    useEffect(() => {
       setPlaying(false)
       audio.pause()
-      setNewAudio(new Audio(url))
+      setNewAudio(() => {
+         const audio = new Audio(url)
+
+         //send the duration to the parent
+         audio.addEventListener('loadedmetadata', () => {
+            onSongChange(audio.duration)
+         })
+
+         audio.volume = 0.1
+
+         return audio
+      })
    }, [url])
 
    return (

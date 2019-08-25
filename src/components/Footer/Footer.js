@@ -21,6 +21,7 @@ export default ({currentSongId: id}) =>{
    const [playing, togglePlaying] = useState(false)
    const [lineGTC, setLineGTC] = useState('0 15px auto')
    const [currentTime, updateCurrentTime] = useState(0)
+   const [songDuration, setSongDuration] = useState(null)
 
    let lineRef = null
 
@@ -33,7 +34,7 @@ export default ({currentSongId: id}) =>{
    useEffect(() =>{
       const updateLineWidth = () =>{
          setLineWidth(() =>{
-            return lineRef.clientWidth // g-t-c: 6fr 1fr
+            return lineRef.clientWidth
          })
       }
       updateLineWidth()
@@ -55,15 +56,17 @@ export default ({currentSongId: id}) =>{
       }, 1000)
    }
 
+   const handleSongChange = duration => {
+      setSongDuration(duration)
+   }
+
    const handlePlayClick = () =>{
       togglePlaying(!playing)
-
       enableCountdown()
    }
 
    const handlePauseClick = () =>{
       togglePlaying(!playing)
-      console.log(intervalId)
       clearInterval(intervalId)
    }
 
@@ -88,7 +91,7 @@ export default ({currentSongId: id}) =>{
          <section className="controls">
             <FaStepBackward className="control"/>
 
-            <Music playing={playing} setPlaying={togglePlaying} url={songsData[id].url}>
+            <Music playing={playing} setPlaying={togglePlaying} url={songsData[id].url} onSongChange={handleSongChange}>
                {playing
                   ? <FaPauseCircle className="control play" onClick={handlePauseClick}/>
                   : <FaPlayCircle className="control play" onClick={handlePlayClick}/>
@@ -118,7 +121,7 @@ export default ({currentSongId: id}) =>{
 
             </div>
 
-            <span className="time">{songsData[id].duration}</span>
+            <span className="time">{currentTime} / {songDuration}</span>
          </section>
 
          <section className="settings">
