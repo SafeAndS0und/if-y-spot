@@ -29,7 +29,7 @@ export default ({children, playing, url, setPlaying, onSongChange, proportion, e
          })
          audio.addEventListener('ended', () => ended(audio.duration))
 
-         audio.volume = 0.1
+         audio.volume = 0.5
 
          return audio
       })

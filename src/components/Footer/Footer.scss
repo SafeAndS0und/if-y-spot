@@ -8,12 +8,13 @@ footer {
   grid-template-columns: max-content min-content minmax(20%, 50%) auto;
 
   .now-playing {
-    padding: 0 25px;
+    padding-left: 15px;
+    padding-right: 4px;
     height: 100%;
     display: grid;
     align-items: center;
     justify-items: center;
-    grid-template-columns: 60px minmax(70px, 180px);
+    grid-template-columns: 60px minmax(70px, auto);
 
     img {
       object-fit: contain;
@@ -65,7 +66,7 @@ footer {
   }
 
   .timer {
-    margin-left: 40px;
+    margin-left: 10px;
     display: grid;
     align-items: center;
     justify-items: center;

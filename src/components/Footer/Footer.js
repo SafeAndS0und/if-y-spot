@@ -52,7 +52,7 @@ export default ({currentSongId: id}) =>{
       intervalId = setInterval(() =>{
          updateCurrentTime(currentTime =>{
             const newTime = currentTime + 1
-            updateCircleVisualPos(Math.floor((newTime / 238) * 100))
+            updateCircleVisualPos(Math.floor((newTime / songDuration) * 100))
             return newTime
          })
       }, 1000)
