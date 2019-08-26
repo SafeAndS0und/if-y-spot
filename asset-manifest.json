@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/totallynotspotify/static/css/main.b7c2053a.chunk.css",
+    "main.js": "/totallynotspotify/static/js/main.a4ee819a.chunk.js",
+    "main.js.map": "/totallynotspotify/static/js/main.a4ee819a.chunk.js.map",
+    "runtime~main.js": "/totallynotspotify/static/js/runtime~main.06e7f091.js",
+    "runtime~main.js.map": "/totallynotspotify/static/js/runtime~main.06e7f091.js.map",
+    "static/js/2.58e00d7a.chunk.js": "/totallynotspotify/static/js/2.58e00d7a.chunk.js",
+    "static/js/2.58e00d7a.chunk.js.map": "/totallynotspotify/static/js/2.58e00d7a.chunk.js.map",
+    "index.html": "/totallynotspotify/index.html",
+    "precache-manifest.97aae242d6ed111f2262d481d3bcd0bc.js": "/totallynotspotify/precache-manifest.97aae242d6ed111f2262d481d3bcd0bc.js",
+    "service-worker.js": "/totallynotspotify/service-worker.js",
+    "static/css/main.b7c2053a.chunk.css.map": "/totallynotspotify/static/css/main.b7c2053a.chunk.css.map"
+  }
+}
