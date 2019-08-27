@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/totallynotspotify/static/css/main.dcbf05e0.chunk.css",
+    "main.css": "/totallynotspotify/static/css/main.296ef0c3.chunk.css",
     "main.js": "/totallynotspotify/static/js/main.81663bcc.chunk.js",
     "main.js.map": "/totallynotspotify/static/js/main.81663bcc.chunk.js.map",
     "runtime~main.js": "/totallynotspotify/static/js/runtime~main.06e7f091.js",
@@ -8,8 +8,8 @@
     "static/js/2.58e00d7a.chunk.js": "/totallynotspotify/static/js/2.58e00d7a.chunk.js",
     "static/js/2.58e00d7a.chunk.js.map": "/totallynotspotify/static/js/2.58e00d7a.chunk.js.map",
     "index.html": "/totallynotspotify/index.html",
-    "precache-manifest.04df3f407f348200d04cb639addf0cb5.js": "/totallynotspotify/precache-manifest.04df3f407f348200d04cb639addf0cb5.js",
+    "precache-manifest.e5448cc13ef84c16014136e222e39f74.js": "/totallynotspotify/precache-manifest.e5448cc13ef84c16014136e222e39f74.js",
     "service-worker.js": "/totallynotspotify/service-worker.js",
-    "static/css/main.dcbf05e0.chunk.css.map": "/totallynotspotify/static/css/main.dcbf05e0.chunk.css.map"
+    "static/css/main.296ef0c3.chunk.css.map": "/totallynotspotify/static/css/main.296ef0c3.chunk.css.map"
   }
 }
